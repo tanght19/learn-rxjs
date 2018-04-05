@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>todos</title>
+	<link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="container py-2">
+	<div class="form-group">
+		<input type="text" class="js-input" autocomplete="off">
+		<button class="js-btn-add">添加</button>
+	</div>
+
+	<article>
+		<h2>任务列表</h2>
+		<ul class="list-group js-task-box">
+		</ul>
+	</article>
+</div>
+<script src="../../bower_components/rxjs/dist/rx.all.compat.js"></script>
+<script src="./index.js"></script>
+</body>
+</html>
