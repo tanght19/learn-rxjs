@@ -72,9 +72,4 @@ const biz = {
   }
 }
 
-const createItem = item => {
-
-}
-
-
 biz.init()
