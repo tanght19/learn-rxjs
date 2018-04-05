@@ -1,0 +1,20 @@
+{
+  "name": "learn-rxjs",
+  "homepage": "https://github.com/bestao/learn-rxjs",
+  "authors": [
+    "Tyler <tanght19@gmail.com>"
+  ],
+  "description": "rxjs demo",
+  "main": "",
+  "keywords": [
+    "rxjs",
+    "reactive"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^4.1.0"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.0.0"
+  }
+}
