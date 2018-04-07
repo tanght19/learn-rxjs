@@ -1,15 +1,10 @@
-let list = [
-  {
-    text: '明天去春游',
-    status: true
-  },
-  {
-    text: '山本',
-    status: false
-  }
-]
+const log = console.log.bind(console)
 
-const log = val => console.log(val)
+const todos = {
+  list() {
+    return fetch('/todos/').then(resp => resp.json())
+  }
+}
 
 const biz = {
   init() {
@@ -22,12 +17,12 @@ const biz = {
       Rx.Observable.fromEvent($input, 'keyup')
       .filter(e => e.keyCode === 13)
     )
+    .debounce(200)
     .map(() => $input.value)
-    .distinctUntilChanged()
+    .distinct()
     .filter(val => val.trim() !== '')
-    .throttle(200)
     .map(text => ({text, status: false}))
-    .merge(Rx.Observable.from(list))
+    .merge(this.queryStream())
     .map(item => {
       const ele = document.createElement('li')
       ele.classList.add('list-group-item')
@@ -41,9 +36,29 @@ const biz = {
     .replay(1)  // why?
     .refCount()
 
-    $stream.mergeMap(this.toggleStream)
-    .merge($stream.mergeMap(this.removeStream))
+    Rx.Observable.merge(
+      $stream.mergeMap(this.toggleStream),
+      $stream.mergeMap(this.removeStream)
+    )
     .subscribe()
+  },
+  queryStream(){
+    const $btnRefresh = document.querySelector('.js-refresh')
+
+    return Rx.Observable.fromEvent($btnRefresh, 'click')
+    .startWith(null)
+    .debounce(150)
+    .flatMapLatest(() => Rx.Observable.fromPromise(todos.list()))
+    .flatMap(Rx.Observable.from)
+  },
+  toggleStream($item) {
+    const $target = $item.querySelector('.js-item')
+
+    return Rx.Observable.fromEvent($target, 'click')
+    .map(e => e.target.classList)
+    .do((classList) => {
+      classList.contains('cls-active') ? classList.remove('cls-active') : classList.add('cls-active')
+    })
   },
   removeStream($item) {
     const $remove = $item.querySelector('.js-remove')
@@ -53,17 +68,7 @@ const biz = {
       $item.parentNode.removeChild($item)
     })
   },
-  toggleStream($item){
-    const $target = $item.querySelector('.js-item')
-
-    return Rx.Observable.fromEvent($target, 'click')
-    .map(e => e.target.classList)
-    .do((classList) => {
-      classList.contains('cls-active') ? classList.remove('cls-active') : classList.add('cls-active')
-    })
-    .map(() => $item)
-  },
-  createItemStr(item){
+  createItemStr(item) {
     const cls = item.status ? 'cls-active' : ''
     return `
 				<span class="task-item js-item ${cls}">${item.text}</span> 

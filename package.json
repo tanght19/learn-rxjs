@@ -1,0 +1,33 @@
+{
+  "name": "learn-rxjs",
+  "version": "1.0.0",
+  "description": "record for learning  reactive programming rxjs",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bestao/learn-rxjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bestao/learn-rxjs/issues"
+  },
+  "homepage": "https://github.com/bestao/learn-rxjs#readme",
+  "devDependencies": {
+    "koa": "^2.5.0",
+    "koa-router": "^7.4.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-compress": "^2.0.0",
+    "koa-logger": "^3.2.0",
+    "koa-route": "^3.2.0",
+    "koa-static": "^4.0.2"
+  },
+  "dependencies": {
+  }
+}
