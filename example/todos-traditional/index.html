@@ -3,23 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<title>todos traditional</title>
-	<link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <div class="container py-2">
-	<div class="form-group">
-		<input type="text" class="js-input" autocomplete="off">
-		<button class="js-add">添加</button>
+	<div class="form-group form-inline">
+		<input type="text" class="form-control js-input" autocomplete="off" placeholder="请输入添加项">
+		<button class="btn btn-primary  js-add">添加</button>
 	</div>
 
 	<article>
 		<h2>任务列表</h2>
-		<ul class="list-group js-task-box">
+		<ul class="list-group list-group-flush js-task-box">
 		</ul>
 	</article>
 </div>
-<script src="../../bower_components/rxjs/dist/rx.all.compat.js"></script>
+<script src="/jquery/dist/jquery.min.js"></script>
+<script src="/rxjs/dist/rx.all.compat.js"></script>
 <script src="./index.js"></script>
 </body>
 </html>

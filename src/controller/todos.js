@@ -25,25 +25,28 @@ const controller = {
     ctx.body = item
   },
   add(ctx, next) {
-    if (!ctx.params.text) {
+    if (!ctx.request.body.text) {
       throw new Error('todo text is essential')
     }
 
-    todos.add(ctx.params.text)
+    todos.add(ctx.request.body.text)
 
     ctx.body = {
       code: 200,
       status: true
     }
   },
-  update(ctx, next) {
-    const {id, text, status} = ctx.params
+  edit(ctx, next) {
+    const {id} = ctx.params
+    const {text} = ctx.request.body
 
-    if(id === undefined || text === undefined || status === undefined){
-      throw new Error('400')
+    console.log(ctx.params, ctx.request.body)
+
+    if(id === undefined || text === undefined){
+      throw new Error(400)
     }
 
-    todos.update(ctx.params)
+    todos.edit(id, text)
     ctx.body = {
       code: 200,
       status: true
@@ -55,10 +58,9 @@ const controller = {
 }
 
 router.get('/todos/', controller.list)
-.get('/list/', controller.list)
 .get('/todos/:id', controller.find)
 .post('/todos/', controller.add)
-.put('/todos/:id', controller.update)
-.delete('/todos/:id', controller.del)
+.put('/todos/:id', controller.edit)
+.del('/todos/:id', controller.del)
 
 module.exports = router

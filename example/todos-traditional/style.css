@@ -2,11 +2,16 @@ i {
 	font-style: normal;
 	cursor: pointer;
 }
-
 .task-item{
 	display: inline-block;
 	width: 50%;
 }
 .task-item.cls-active {
 	text-decoration: line-through;
+}
+.list-group-item {
+	display: flex;
+}
+.fn-hide {
+	display: none;
 }

@@ -14,7 +14,9 @@ let list = [
 const todos = {
   list(id) {
     if(id){
-      return list.find(item => id === item.id)
+      const target = list.find(item => id === item.id) 
+
+      return target
     }
 
     return list
@@ -25,17 +27,8 @@ const todos = {
   remove(text) {
     list = list.filter(item => item.text !== text)
   },
-  update(newItem) {
-    list = list.map(item => {
-      if (newItem.id === item.id) {
-        return {
-          ...item,
-          newItem
-        }
-      }
-
-      return item
-    })
+  edit(id, newText){
+    list.find(item => +item.id === +id).text = newText
   }
 }
 
